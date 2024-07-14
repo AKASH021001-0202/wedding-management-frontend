@@ -78,7 +78,7 @@ const PageHeader = () => {
             <div className="container">
               <a className="navbar-brand" href="/">
                 <img
-                  src="../../../public/logo.png"
+                  src="https://i.ibb.co/d0NcJKM/logo.png"
                   style={{ width: "120px" }}
                   alt="logo"
                 />
