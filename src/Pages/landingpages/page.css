@@ -1,0 +1,84 @@
+/* styles.css */
+
+/* Header styles */
+.custom-header {
+    position: relative;
+    color: rgb(0, 0, 0);
+    text-align: center;
+   
+  }
+  
+  /* Header content styles */
+  .custom-header-content {
+    margin: 0 auto;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    
+  }
+  
+  /* Navbar styles */
+  .custom-navbar {
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+  }
+  
+  /* Navbar container styles */
+  .custom-navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  /* Navbar brand styles */
+  .custom-navbar-brand {
+    font-size: 1.5rem;
+    color: white; 
+
+    
+  }
+  
+  /* Navbar link styles */
+  .custom-navbar-link {
+    color: rgb(0, 0, 0); /* Change nav link color here */
+    padding: 1rem
+  }
+  
+  /* Navbar button styles */
+  .custom-navbar-button {
+    padding: 1rem;
+  }
+  
+  .custom-navbar-link {
+    color: rgb(0, 0, 0);
+    padding: 0.5rem 1rem;
+  }
+  
+  .custom-navbar-button {
+    padding: 0.5rem 1rem;
+  }
+  .navbar-expand-lg .navbar-nav {
+    flex-direction: row;
+    display: flex;
+    align-items: baseline;
+}
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .custom-navbar {
+      flex-direction: column;
+    }
+  
+    .custom-navbar-container {
+      flex-direction: column;
+    }
+    img.rounded-circle{
+width: auto;
+    }
+  }
+  
