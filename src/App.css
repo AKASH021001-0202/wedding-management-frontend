@@ -8,7 +8,15 @@ img{
   object-fit: cover;
 }
 
-
+.rounded-circle {
+  border-radius: 50%!important;
+  width: 35px;
+}
+#home-section img{
+ height: 550px;
+ object-fit: cover;
+ width: 100%;
+}
 
 .card-box {
   background: #fff;

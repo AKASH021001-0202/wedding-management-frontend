@@ -22,12 +22,7 @@ export const menu = [
     url: "/all-events",
     icon: <Icons.TbList className="menu_icon" />, // Changed icon
   },
-  {
-    name: "Organizers",
-    url: "/organizers/manage",
-    icon: <Icons.TbUsers className="menu_icon" />, // Changed icon
-    isAdmin: true,
-  },
+
   {
     name: "Reviews",
     url: "/reviews",

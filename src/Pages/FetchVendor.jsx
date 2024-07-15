@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const FetchVendors = () => {
     const dispatch = useDispatch();
-    const vendors = useSelector(state => state.vendors.items || []);
+    const vendors = useSelector(state => state.vendors.vendors || []);
     const loading = useSelector(state => state.vendors.loading);
     const error = useSelector(state => state.vendors.error);
   
@@ -18,7 +18,7 @@ const FetchVendors = () => {
 
     return (
         <div className='card p-5 mt-3 mb-3'>
-            <h1>Manage Vendors</h1>
+            
             {loading && <p>Loading...</p>}
             {error && <p style={{ color: 'red' }}>Error fetching vendors: {error}</p>}
             <div className="mb-3">

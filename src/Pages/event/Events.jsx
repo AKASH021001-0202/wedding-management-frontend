@@ -48,7 +48,7 @@ const Events = () => {
 
   return (
     <div className="container mt-5">
-      <h1 className="text-center mb-4">Upcoming Events</h1>
+      <h1 className="text-center mb-4">ALL EVENTS</h1>
       {status === 'loading' && <p>Loading...</p>}
       {status === 'failed' && <p style={{ color: 'red' }}>Error fetching events: {error}</p>}
       <div className="row">
@@ -88,7 +88,7 @@ const Events = () => {
                   <div className="card-body d-flex flex-column justify-content-between">
                     {editEvent !== event ? (
                       <>
-                        <button className="btn btn-primary mb-2" onClick={() => handleEdit(event)}>
+                       {/*  <button className="btn btn-primary mb-2" onClick={() => handleEdit(event)}>
                           Edit
                         </button>
                         <button
@@ -96,7 +96,7 @@ const Events = () => {
                           onClick={() => handleDelete(event._id)}
                         >
                           Delete
-                        </button>
+                        </button> */}
                       </>
                     ) : null}
                   </div>

@@ -6,16 +6,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "../../Pages/landingpages/page.css";
 import axios from "axios";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { clearUser } from "../../redux/slices/userSlice";
 import { useDispatch } from "react-redux";
 
 const PageHeader = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
   const [isVendor, setIsVendor] = useState(false);
-  const dispatch =useDispatch()
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -76,13 +74,13 @@ const PageHeader = () => {
         <div className="custom-header-content">
           <nav className="navbar navbar-expand-lg custom-navbar">
             <div className="container">
-              <a className="navbar-brand" href="/">
+              <Link className="navbar-brand" to="/">
                 <img
                   src="https://i.ibb.co/d0NcJKM/logo.png"
                   style={{ width: "120px" }}
                   alt="logo"
                 />
-              </a>
+              </Link>
               <button
                 className="navbar-toggler"
                 type="button"
@@ -97,65 +95,144 @@ const PageHeader = () => {
               <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li className="nav-item">
-                    <a
+                    <Link
                       className="nav-link custom-navbar-link"
-                      href="/#home-section"
+                      to="/#home-section"
                     >
                       Home
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a
-                      className="nav-link custom-navbar-link"
-                      href="/#about-section"
-                    >
-                      About
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
                     <Link
-                      to="/allEvents"
                       className="nav-link custom-navbar-link"
+                      to="/#about-section"
+                    >
+                      About
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link custom-navbar-link"
+                      to="/allEvents"
                     >
                       Events
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <a
-                      href="/#contact-section"
+                    <Link
                       className="nav-link custom-navbar-link"
+                      to="/#contact-section"
                     >
                       Contact
-                    </a>
+                    </Link>
                   </li>
                   {isAuthenticated && (
-                    <li className="nav-item dropdown">
-                      <a
-                        className="nav-link dropdown-toggle custom-navbar-link"
-                        href="#"
-                        id="accountDropdown"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
+                    // <li className="nav-item dropdown">
+                    //   <Link
+                    //     className="nav-link dropdown-toggle custom-navbar-link"
+                    //     to="#"
+                    //     id="accountDropdown"
+                    //     role="button"
+                    //     data-bs-toggle="dropdown"
+                    //     aria-expanded="false"
+                    //     style={{ position: "relative", zIndex: "999999999" }} // Adjust z-index here
+                    //   >
+                    // <img
+                    //   src="https://i.ibb.co/cCqLFym/images.png"
+                    //   alt="Profile"
+                    //   className="rounded-circle"
+                    //   width="40"
+                    //   height="40"
+                    // />
+                    //   </Link>
+                    //   <ul
+                    //     className="dropdown-menu dropdown-menu-end"
+                    //     aria-labelledby="accountDropdown"
+                    //     style={{ position: "absolute", zIndex: "999999998" }} // Adjust z-index here
+                    //   >
+                    //     <li>
+                    //       <Link to="/becomevendor" className="dropdown-item">
+                    //         Become a Vendor
+                    //       </Link>
+                    //     </li>
+                    //     {isVendor && (
+                    //       <li>
+                    //         <Link to="/dashboard" className="dropdown-item">
+                    //           Dashboard
+                    //         </Link>
+                    //       </li>
+                    //     )}
+                    //     <li>
+                    //       <Link to="/profile" className="dropdown-item">
+                    //         My Profile
+                    //       </Link>
+                    //     </li>
+                    //     <li>
+                    //       <Link to="/mybookings" className="dropdown-item">
+                    //         My Bookings
+                    //       </Link>
+                    //     </li>
+                    //     <li>
+                    //       <hr className="dropdown-divider" />
+                    //     </li>
+                    //     <li>
+                    //       <button onClick={handleLogout} className="dropdown-item">
+                    //         Logout
+                    //       </button>
+                    //     </li>
+                    //   </ul>
+                    // </li>
+                    <img
+                      class="btn btn-primary"
+                      type="button"
+                      data-bs-toggle="offcanvas"
+                      data-bs-target="#offcanvasRight"
+                      aria-controls="offcanvasRight"
+                      src="https://i.ibb.co/cCqLFym/images.png"
+                      alt="Profile"
+                      className="rounded-circle"
+                      width="40"
+                      height="40"
+                    />
+                  )}
+                   {!isAuthenticated && (
+                    <li className="nav-item">
+                      <Link
+                        to="/login"
+                        className="btn btn-danger btn-sm custom-navbar-button"
                       >
-                        <img
-                          src="https://i.ibb.co/cCqLFym/images.png"
-                          alt="Profile"
-                          className="rounded-circle"
-                          width="40"
-                          height="40"
-                        />
-                      </a>
-                      <ul
-                        className="dropdown-menu dropdown-menu-end"
-                        aria-labelledby="accountDropdown"
-                      >
-                        <li>
+                        Login
+                      </Link>
+                    </li>
+                  )}
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <div
+        className="offcanvas offcanvas-end"
+        tabindex="-1"
+        id="offcanvasRight"
+        aria-labelledby="offcanvasRightLabel"
+      >
+        <div className="offcanvas-header">
+          <h5 id="offcanvasRightLabel">Menus</h5>
+          <button
+            type="button"
+            className="btn-close text-reset"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div className="offcanvas-body"> 
+          <ul><li>
                           <Link to="/becomevendor" className="dropdown-item">
                             Become a Vendor
                           </Link>
                         </li>
-                        {isVendor ==true && (
+                        {isVendor && (
                           <li>
                             <Link to="/dashboard" className="dropdown-item">
                               Dashboard
@@ -175,33 +252,16 @@ const PageHeader = () => {
                         <li>
                           <hr className="dropdown-divider" />
                         </li>
-                        <li>
-                          <button
-                            onClick={handleLogout}
-                            className="dropdown-item"
-                          >
+                       
+                      
+                      </ul>
+                        <button onClick={handleLogout} className="btn btn-danger mr-5">
                             Logout
                           </button>
-                        </li>
-                      </ul>
-                    </li>
-                  )}
-                  {!isAuthenticated && (
-                    <li className="nav-item">
-                      <Link
-                        to="/login"
-                        className="btn btn-danger btn-sm custom-navbar-button"
-                      >
-                        Login
-                      </Link>
-                    </li>
-                  )}
-                </ul>
-              </div>
-            </div>
-          </nav>
+
+          
         </div>
-      </header>
+      </div>
     </div>
   );
 };

@@ -28,11 +28,46 @@ const Home = () => {
       <PageHeader />
 
       <section id="home-section" style={{ backgroundColor: "#000070" }}>
-        <img
-          src="https://i.ibb.co/L5YMm0V/banner.jpg"
-          alt=""
-          style={{ width: "100%" }}
-        />
+
+         <div id="weddingCarousel" className="carousel slide" data-ride="carousel">
+      <ol className="carousel-indicators">
+        <li data-target="#weddingCarousel" data-slide-to="0" className="active"></li>
+        <li data-target="#weddingCarousel" data-slide-to="1"></li>
+        <li data-target="#weddingCarousel" data-slide-to="2"></li>
+      </ol>
+      <div className="carousel-inner">
+        <div className="carousel-item active">
+          <img src="https://i.ibb.co/yFzpVBZ/decorated-wedding-hall-with-candles-round-tables-centerpieces.jpg
+" className="d-block w-100" alt="First slide"/>
+          <div className="carousel-caption d-none d-md-block">
+            <h5>Wedding Venue</h5>
+            <p>Find the perfect venue for your wedding day.</p>
+          </div>
+        </div>
+        <div className="carousel-item">
+          <img src="https://i.ibb.co/zSrQh8V/luxury-wedding-tent-with-decor-banquet.jpg" className="d-block w-100" alt="Second slide"/>
+          <div className="carousel-caption d-none d-md-block">
+            <h5>Catering Services</h5>
+            <p>Delicious menus to delight your guests.</p>
+          </div>
+        </div>
+        <div className="carousel-item">
+          <img src="https://i.ibb.co/yV6J0fn/warm-welcoming-atmosphere-as-guests-arrive-party-venue.jpg" className="d-block w-100" alt="Third slide"/>
+          <div className="carousel-caption d-none d-md-block">
+            <h5>Photography</h5>
+            <p>Capture the special moments with professional photography.</p>
+          </div>
+        </div>
+      </div>
+      <a className="carousel-control-prev" href="#weddingCarousel" role="button" data-slide="prev">
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="sr-only">Previous</span>
+      </a>
+      <a className="carousel-control-next" href="#weddingCarousel" role="button" data-slide="next">
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="sr-only">Next</span>
+      </a>
+    </div>
       </section>
       <div className="main-content container mt-5">
         <div className="row">
@@ -110,6 +145,7 @@ const Home = () => {
               <h1>Engagement</h1>
             </div>
           </div>
+          <p align="center"><Link to={"/allEvents"} className="btn btn-primary mt-3 mx-auto my-auto  " >View All Event </Link> </p>
         </div>
       </section>
       <section

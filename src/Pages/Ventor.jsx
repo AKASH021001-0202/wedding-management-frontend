@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchVendors, deleteVendor } from '../redux/slices/vendorSlice';
+import { fetchVendors, deleteVendor, AllfetchVendors } from '../redux/slices/vendorSlice';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Vendors = () => {
     const dispatch = useDispatch();
-    const vendors = useSelector(state => state.vendors.items || []);
-    const loading = useSelector(state => state.vendors.loading);
-    const error = useSelector(state => state.vendors.error);
+    const vendors = useSelector(state => state.vendor.vendors);
+    const loading = useSelector(state => state.vendor.status === 'loading');
+    const error = useSelector(state => state.vendor.error);
     const navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(fetchVendors());
+        dispatch(AllfetchVendors());
     }, [dispatch]);
 
     const handleDelete = (id) => {
@@ -23,7 +23,7 @@ const Vendors = () => {
     };
 
     const handleEdit = (id) => {
-      navigate(`/edit-vendor/${id}`);
+        navigate(`/edit-vendor/${id}`);
     };
 
     return (

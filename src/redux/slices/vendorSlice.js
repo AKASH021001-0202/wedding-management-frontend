@@ -19,6 +19,19 @@ export const fetchVendors = createAsyncThunk('vendors/fetchVendors', async (_, t
   }
 });
 
+export const AllfetchVendors = createAsyncThunk('vendors/AllfetchVendors', async (_, thunkAPI) => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/vendors/all`, {
+      headers: {
+        Authorization: getToken(),
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data);
+  }
+});
+
 export const addVendor = createAsyncThunk('vendors/addVendor', async (newVendor, thunkAPI) => {
   try {
     const token = getToken();
@@ -80,27 +93,6 @@ export const deleteVendor = createAsyncThunk('vendors/deleteVendor', async (id, 
   }
 });
 
-export const updateUserRoleToVendor = (userId) => async (dispatch) => {
-  try {
-    const token = getToken();
-    if (!token) throw new Error('No token found');
-
-    const response = await axios.patch(
-      `${import.meta.env.VITE_BACKEND_URL}/vendors/${userId}/vendors`,
-      {},
-      {
-        headers: {
-          Authorization: token,
-        },
-      }
-    );
-    dispatch(setVendor(response.data)); // Assuming you intended to update vendor state
-  } catch (error) {
-    console.error('Error updating user role:', error);
-    throw error;
-  }
-};
-
 const vendorSlice = createSlice({
   name: 'vendor',
   initialState: {
@@ -111,7 +103,7 @@ const vendorSlice = createSlice({
   },
   reducers: {
     setVendor: (state, action) => {
-      state.vendor = action.payload; // Corrected to set vendor state
+      state.vendor = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -127,19 +119,64 @@ const vendorSlice = createSlice({
         state.status = 'failed';
         state.error = action.payload;
       })
-      // Add similar cases for other async thunks as needed
+      .addCase(AllfetchVendors.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(AllfetchVendors.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.vendors = action.payload;
+      })
+      .addCase(AllfetchVendors.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
       .addCase(addVendor.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(addVendor.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        // Update state as necessary after adding a vendor
+        state.vendors.push(action.payload);
       })
       .addCase(addVendor.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
+      })
+      .addCase(updateVendor.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateVendor.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        const index = state.vendors.findIndex(vendor => vendor._id === action.payload._id);
+        if (index !== -1) {
+          state.vendors[index] = action.payload;
+        }
+      })
+      .addCase(updateVendor.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+      .addCase(fetchVendorById.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchVendorById.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.vendor = action.payload;
+      })
+      .addCase(fetchVendorById.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+      .addCase(deleteVendor.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(deleteVendor.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.vendors = state.vendors.filter(vendor => vendor._id !== action.payload);
+      })
+      .addCase(deleteVendor.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
       });
-      // Repeat for updateVendor, fetchVendorById, deleteVendor, etc.
   },
 });
 
